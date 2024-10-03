@@ -13,4 +13,4 @@ All other projects I found on Pypi.org, github.com, and using Google search did 
 
 Usage:
 
-:construction: [see the docs](#) :construction:
+See [the docs](https://mshafer1.github.io/py-solfege).

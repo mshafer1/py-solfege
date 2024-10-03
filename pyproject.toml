@@ -5,6 +5,8 @@ description = "Python library for dealing with musical scales and solfege"
 authors = ["mshafer1"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/mshafer1/py-solfege"
+documentation = "https://mshafer1.github.io/py-solfege"
 
 [tool.poetry.dependencies]
 python = "^3.9"
