@@ -1,0 +1,98 @@
+solfege
+=======
+
+.. py:module:: solfege
+
+.. autoapi-nested-parse::
+
+   Library to provide tooling around scales and their solfège.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/solfege/note/index
+   /autoapi/solfege/scale/index
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   solfege.Note
+   solfege.Scale
+   solfege.ScaleType
+
+
+Package Contents
+----------------
+
+.. py:class:: Note(name: str, octave: Optional[int] = None)
+
+   Represent a note on a scale.
+
+
+   .. py:property:: letter
+      The letter part of the note name.
+
+
+
+   .. py:property:: accidental
+      :type: Optional[str]
+
+      If # or b or None if no accidental on this note.
+
+
+
+   .. py:property:: name
+      The short name of the note.
+
+      e.g. C or A# or Bb
+
+
+
+   .. py:property:: octave
+      The octave this note is in.
+
+
+
+.. py:class:: Scale(starting_note: solfege.note.Note, type: ScaleType = ScaleType.MAJOR)
+
+   A representation of a musical scale.
+
+
+   .. py:method:: solfege(note_: solfege.note.Note)
+
+      Get the movable-do solfege name for a note in this scale.
+
+      For minor keys, moving-do la-based minor is used.
+
+      Args:
+          note_ (note.Note): The note in question.
+
+      Returns:
+          (str) the solfege name for that note.
+
+
+
+.. py:class:: ScaleType
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   Supported scale types.
+
+
+   .. py:attribute:: MAJOR
+      :value: 0
+
+
+
+   .. py:attribute:: MINOR
+
+

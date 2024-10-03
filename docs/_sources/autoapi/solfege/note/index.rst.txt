@@ -1,0 +1,51 @@
+solfege.note
+============
+
+.. py:module:: solfege.note
+
+.. autoapi-nested-parse::
+
+   Classes to represent a note on the scale.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   solfege.note.Note
+
+
+Module Contents
+---------------
+
+.. py:class:: Note(name: str, octave: Optional[int] = None)
+
+   Represent a note on a scale.
+
+
+   .. py:property:: letter
+      The letter part of the note name.
+
+
+
+   .. py:property:: accidental
+      :type: Optional[str]
+
+      If # or b or None if no accidental on this note.
+
+
+
+   .. py:property:: name
+      The short name of the note.
+
+      e.g. C or A# or Bb
+
+
+
+   .. py:property:: octave
+      The octave this note is in.
+
+
+

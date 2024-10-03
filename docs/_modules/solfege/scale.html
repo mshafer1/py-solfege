@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>solfege.scale &mdash; solfege  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            solfege
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">solfege</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">solfege.scale</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for solfege.scale</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Classes to represent a scale of notes.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">enum</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MappingProxyType</span>
+
+<span class="kn">from</span> <span class="nn">solfege</span> <span class="kn">import</span> <span class="n">note</span>
+
+<span class="n">_KEYS_PROGRESSION</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;D&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;E&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;F&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;G&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">_KEY_INDEX_MAP</span> <span class="o">=</span> <span class="n">MappingProxyType</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_KEYS_PROGRESSION</span><span class="p">)})</span>
+
+
+<span class="k">def</span> <span class="nf">_half_step</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_whole_step</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="n">_half_step</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_half_step</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ScaleType">
+<a class="viewcode-back" href="../../autoapi/solfege/scale/index.html#solfege.ScaleType">[docs]</a>
+<span class="k">class</span> <span class="nc">ScaleType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Supported scale types.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ScaleType.MAJOR">
+<a class="viewcode-back" href="../../autoapi/solfege/scale/index.html#solfege.ScaleType.MAJOR">[docs]</a>
+    <span class="n">MAJOR</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="ScaleType.MINOR">
+<a class="viewcode-back" href="../../autoapi/solfege/scale/index.html#solfege.ScaleType.MINOR">[docs]</a>
+    <span class="n">MINOR</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span></div>
+</div>
+
+
+
+<span class="n">_SCALE_KEY_SIGNATURES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;C#&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c#&quot;</span><span class="p">,</span> <span class="s2">&quot;d#&quot;</span><span class="p">,</span> <span class="s2">&quot;e#&quot;</span><span class="p">,</span> <span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;g#&quot;</span><span class="p">,</span> <span class="s2">&quot;a#&quot;</span><span class="p">,</span> <span class="s2">&quot;b#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;F#&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;g#&quot;</span><span class="p">,</span> <span class="s2">&quot;a#&quot;</span><span class="p">,</span> <span class="s2">&quot;c#&quot;</span><span class="p">,</span> <span class="s2">&quot;d#&quot;</span><span class="p">,</span> <span class="s2">&quot;e#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c#&quot;</span><span class="p">,</span> <span class="s2">&quot;d#&quot;</span><span class="p">,</span> <span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;g#&quot;</span><span class="p">,</span> <span class="s2">&quot;a#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;g#&quot;</span><span class="p">,</span> <span class="s2">&quot;c#&quot;</span><span class="p">,</span> <span class="s2">&quot;d#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c#&quot;</span><span class="p">,</span> <span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;g#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;c#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;f#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Bb&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bb&quot;</span><span class="p">,</span> <span class="s2">&quot;eb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Eb&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;eb&quot;</span><span class="p">,</span> <span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Ab&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="s2">&quot;eb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Db&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="s2">&quot;eb&quot;</span><span class="p">,</span> <span class="s2">&quot;gb&quot;</span><span class="p">,</span> <span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Gb&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gb&quot;</span><span class="p">,</span> <span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">,</span> <span class="s2">&quot;cb&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="s2">&quot;eb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Cb&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cb&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="s2">&quot;eb&quot;</span><span class="p">,</span> <span class="s2">&quot;fb&quot;</span><span class="p">,</span> <span class="s2">&quot;gb&quot;</span><span class="p">,</span> <span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">],</span>
+    <span class="c1"># minors</span>
+    <span class="s2">&quot;A#m&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a#&quot;</span><span class="p">,</span> <span class="s2">&quot;b#&quot;</span><span class="p">,</span> <span class="s2">&quot;c#&quot;</span><span class="p">,</span> <span class="s2">&quot;d#&quot;</span><span class="p">,</span> <span class="s2">&quot;e#&quot;</span><span class="p">,</span> <span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;g#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;D#m&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;d#&quot;</span><span class="p">,</span> <span class="s2">&quot;e#&quot;</span><span class="p">,</span> <span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;g#&quot;</span><span class="p">,</span> <span class="s2">&quot;a#&quot;</span><span class="p">,</span> <span class="s2">&quot;c#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;G#m&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;g#&quot;</span><span class="p">,</span> <span class="s2">&quot;a#&quot;</span><span class="p">,</span> <span class="s2">&quot;c#&quot;</span><span class="p">,</span> <span class="s2">&quot;d#&quot;</span><span class="p">,</span> <span class="s2">&quot;f#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;C#m&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c#&quot;</span><span class="p">,</span> <span class="s2">&quot;d#&quot;</span><span class="p">,</span> <span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;g#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;F#m&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;f#&quot;</span><span class="p">,</span> <span class="s2">&quot;g#&quot;</span><span class="p">,</span> <span class="s2">&quot;c#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Bm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c#&quot;</span><span class="p">,</span> <span class="s2">&quot;f#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Em&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;f#&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Am&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;Dm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Gm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bb&quot;</span><span class="p">,</span> <span class="s2">&quot;eb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Cm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;eb&quot;</span><span class="p">,</span> <span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Fm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="s2">&quot;eb&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Bbm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bb&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="s2">&quot;eb&quot;</span><span class="p">,</span> <span class="s2">&quot;gb&quot;</span><span class="p">,</span> <span class="s2">&quot;ab&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;ebm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;eb&quot;</span><span class="p">,</span> <span class="s2">&quot;gb&quot;</span><span class="p">,</span> <span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">,</span> <span class="s2">&quot;cb&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;abm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="s2">&quot;bb&quot;</span><span class="p">,</span> <span class="s2">&quot;cb&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="s2">&quot;eb&quot;</span><span class="p">,</span> <span class="s2">&quot;fb&quot;</span><span class="p">,</span> <span class="s2">&quot;gb&quot;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">_SCALE_KEY_MAPPING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">key</span><span class="p">:</span> <span class="p">{</span><span class="n">note_name</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span> <span class="n">modifier</span> <span class="k">for</span> <span class="n">note_name</span><span class="p">,</span> <span class="n">modifier</span> <span class="ow">in</span> <span class="n">part</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">_SCALE_KEY_SIGNATURES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">}</span>
+
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_scale_notes</span><span class="p">(</span><span class="n">starting_note</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">major_minor</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="n">_KEYS_PROGRESSION</span><span class="p">):</span>
+        <span class="n">modifier</span> <span class="o">=</span> <span class="n">_SCALE_KEY_MAPPING</span><span class="p">[</span><span class="n">starting_note</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">major_minor</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">yield</span> <span class="n">key</span> <span class="o">+</span> <span class="n">modifier</span>
+
+
+<span class="k">def</span> <span class="nf">_rotate</span><span class="p">(</span><span class="n">o</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Container</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="n">repeated</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">repeated</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="o">+</span> <span class="n">n</span><span class="p">))</span>
+
+
+<span class="n">_DIATONIC_SOLFEGE_NAMES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Do&quot;</span><span class="p">,</span> <span class="s2">&quot;Re&quot;</span><span class="p">,</span> <span class="s2">&quot;Mi&quot;</span><span class="p">,</span> <span class="s2">&quot;Fa&quot;</span><span class="p">,</span> <span class="s2">&quot;Sol&quot;</span><span class="p">,</span> <span class="s2">&quot;La&quot;</span><span class="p">,</span> <span class="s2">&quot;Ti&quot;</span><span class="p">,</span> <span class="s2">&quot;Do&quot;</span><span class="p">)</span>
+
+<span class="n">_MINOR_DIATONIC_SOLFEGE_NAMES</span> <span class="o">=</span> <span class="n">_rotate</span><span class="p">(</span><span class="n">_DIATONIC_SOLFEGE_NAMES</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">_MINOR_DIATONIC_SOLFEGE_NAMES</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_MINOR_DIATONIC_SOLFEGE_NAMES</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">_CHROMATIC_SOLFEGE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;Ti&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span> <span class="s2">&quot;Di&quot;</span><span class="p">},</span>  <span class="c1"># Do</span>
+    <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;Ra&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span> <span class="s2">&quot;Ri&quot;</span><span class="p">},</span>  <span class="c1"># Re</span>
+    <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;Me&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span> <span class="s2">&quot;Fa&quot;</span><span class="p">},</span>  <span class="c1"># Mi</span>
+    <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;Mi&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span> <span class="s2">&quot;Fi&quot;</span><span class="p">},</span>  <span class="c1"># Fa</span>
+    <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;Se&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span> <span class="s2">&quot;Si&quot;</span><span class="p">},</span>  <span class="c1"># Sol</span>
+    <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;Le&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span> <span class="s2">&quot;Li&quot;</span><span class="p">},</span>  <span class="c1"># La</span>
+    <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;Te&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span> <span class="s2">&quot;Do&quot;</span><span class="p">},</span>  <span class="c1"># Ti</span>
+<span class="p">)</span>
+
+<span class="n">_MINOR_CHROMATIC_SOLFEGE</span> <span class="o">=</span> <span class="n">_rotate</span><span class="p">(</span><span class="n">_CHROMATIC_SOLFEGE</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Scale">
+<a class="viewcode-back" href="../../autoapi/solfege/scale/index.html#solfege.Scale">[docs]</a>
+<span class="k">class</span> <span class="nc">Scale</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A representation of a musical scale.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">starting_note</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="n">ScaleType</span> <span class="o">=</span> <span class="n">ScaleType</span><span class="o">.</span><span class="n">MAJOR</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a scale.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            starting_note (note.Note): the tonic note the scale starts on.</span>
+<span class="sd">            type (ScaleType): Which type of scale to load in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_starting_note</span> <span class="o">=</span> <span class="n">starting_note</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="nb">type</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_starting_note_index</span> <span class="o">=</span> <span class="n">_KEY_INDEX_MAP</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_starting_note</span><span class="o">.</span><span class="n">letter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_diatonic_notes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">octave</span><span class="o">=</span><span class="n">starting_note</span><span class="o">.</span><span class="n">octave</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">8</span> <span class="k">else</span> <span class="n">starting_note</span><span class="o">.</span><span class="n">octave</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+                <span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span>
+                    <span class="n">_scale_notes</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_starting_note</span><span class="p">,</span>
+                        <span class="n">major_minor</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;m&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="n">ScaleType</span><span class="o">.</span><span class="n">MINOR</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                    <span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_starting_note_index</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_starting_note_index</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">_KEYS_PROGRESSION</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_diatonic_position_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">note_</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span> <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">ScaleType</span><span class="o">.</span><span class="n">MAJOR</span> <span class="k">else</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_diatonic_notes</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">note_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_diatonic_notes</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="p">}</span>
+
+<div class="viewcode-block" id="Scale.solfege">
+<a class="viewcode-back" href="../../autoapi/solfege/scale/index.html#solfege.Scale.solfege">[docs]</a>
+    <span class="k">def</span> <span class="nf">solfege</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">note_</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the movable-do solfege name for a note in this scale.</span>
+
+<span class="sd">        For minor keys, moving-do la-based minor is used.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            note_ (note.Note): The note in question.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (str) the solfege name for that note.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diatonic_position_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">note_</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">_DIATONIC_SOLFEGE_NAMES</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="n">ScaleType</span><span class="o">.</span><span class="n">MAJOR</span>
+                <span class="k">else</span> <span class="n">_MINOR_DIATONIC_SOLFEGE_NAMES</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="p">)</span>
+
+        <span class="n">base_index</span><span class="p">,</span> <span class="n">base_note</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">note_base</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">note_base</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_diatonic_notes</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">note_base</span><span class="o">.</span><span class="n">letter</span> <span class="o">==</span> <span class="n">note_</span><span class="o">.</span><span class="n">letter</span>
+            <span class="p">),</span>
+            <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">base_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Either </span><span class="si">{</span><span class="n">note_</span><span class="si">}</span><span class="s2"> is not valid in the key of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_starting_note</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">base_note</span><span class="o">.</span><span class="n">letter</span> <span class="o">==</span> <span class="n">note_</span><span class="o">.</span><span class="n">letter</span><span class="p">:</span>
+            <span class="c1"># this is the note that was shifted</span>
+            <span class="n">chromatic_map</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">_CHROMATIC_SOLFEGE</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">==</span> <span class="n">ScaleType</span><span class="o">.</span><span class="n">MAJOR</span> <span class="k">else</span> <span class="n">_MINOR_CHROMATIC_SOLFEGE</span>
+            <span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">chromatic_map</span><span class="p">[</span><span class="n">base_index</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">note_</span><span class="o">.</span><span class="n">accidental</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span>
+            <span class="k">if</span> <span class="n">base_note</span><span class="o">.</span><span class="n">accidental</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">note_</span><span class="o">.</span><span class="n">accidental</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">base_note</span><span class="o">.</span><span class="n">accidental</span> <span class="o">==</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span>  <span class="c1"># base note is sharp, return as if it were lowered</span>
+                    <span class="k">return</span> <span class="n">chromatic_map</span><span class="p">[</span><span class="n">base_index</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">chromatic_map</span><span class="p">[</span><span class="n">base_index</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This case was not handled.&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, mshafer1.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
