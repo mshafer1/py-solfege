@@ -19,11 +19,15 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx_mdinclude',
+    'sphinx.ext.autodoc.typehints',
 ]
 
 extensions.append('autoapi.extension')
 
 autoapi_dirs = ['../solfege']
+autodoc_typehints = 'description'
+templates_path = ['_templates']
+autoapi_template_dir = '_templates/autoapi'
 
 import autoapi
 

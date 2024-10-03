@@ -110,14 +110,8 @@
 <span class="k">class</span> <span class="nc">ScaleType</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Supported scale types.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ScaleType.MAJOR">
-<a class="viewcode-back" href="../../autoapi/solfege/scale/index.html#solfege.ScaleType.MAJOR">[docs]</a>
-    <span class="n">MAJOR</span> <span class="o">=</span> <span class="mi">0</span></div>
-
-<div class="viewcode-block" id="ScaleType.MINOR">
-<a class="viewcode-back" href="../../autoapi/solfege/scale/index.html#solfege.ScaleType.MINOR">[docs]</a>
+    <span class="n">MAJOR</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">MINOR</span> <span class="o">=</span> <span class="n">enum</span><span class="o">.</span><span class="n">auto</span></div>
-</div>
 
 
 
@@ -226,8 +220,6 @@
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">note_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_diatonic_notes</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="p">}</span>
 
-<div class="viewcode-block" id="Scale.solfege">
-<a class="viewcode-back" href="../../autoapi/solfege/scale/index.html#solfege.Scale.solfege">[docs]</a>
     <span class="k">def</span> <span class="nf">solfege</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">note_</span><span class="p">:</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the movable-do solfege name for a note in this scale.</span>
 
@@ -275,7 +267,6 @@
                     <span class="k">return</span> <span class="n">chromatic_map</span><span class="p">[</span><span class="n">base_index</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
 
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This case was not handled.&quot;</span><span class="p">)</span></div>
-</div>
 
 </pre></div>
 

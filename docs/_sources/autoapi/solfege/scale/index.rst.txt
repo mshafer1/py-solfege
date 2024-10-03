@@ -21,6 +21,8 @@ Classes
 Module Contents
 ---------------
 
+.. role:: raw-html(raw)
+    :format: html
 .. py:class:: ScaleType
 
    Bases: :py:obj:`enum.Enum`
@@ -28,21 +30,23 @@ Module Contents
 
    Supported scale types.
 
-
+:raw-html:`<br />`
    .. py:attribute:: MAJOR
       :value: 0
 
 
-
+:raw-html:`<br />`
    .. py:attribute:: MINOR
 
 
-.. py:class:: Scale(starting_note: solfege.note.Note, type: ScaleType = ScaleType.MAJOR)
+.. role:: raw-html(raw)
+    :format: html
+.. py:class:: Scale(starting_note, type = ScaleType.MAJOR)
 
    A representation of a musical scale.
 
-
-   .. py:method:: solfege(note_: solfege.note.Note)
+:raw-html:`<br />`
+   .. py:method:: solfege(note_)
 
       Get the movable-do solfege name for a note in this scale.
 

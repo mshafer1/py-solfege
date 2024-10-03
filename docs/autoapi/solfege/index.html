@@ -57,8 +57,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#classes">Classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#solfege.Note"><code class="docutils literal notranslate"><span class="pre">Note</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solfege.letter"><code class="docutils literal notranslate"><span class="pre">letter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solfege.accidental"><code class="docutils literal notranslate"><span class="pre">accidental</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solfege.name"><code class="docutils literal notranslate"><span class="pre">name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solfege.octave"><code class="docutils literal notranslate"><span class="pre">octave</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solfege.Scale"><code class="docutils literal notranslate"><span class="pre">Scale</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solfege.solfege"><code class="docutils literal notranslate"><span class="pre">solfege()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#solfege.ScaleType"><code class="docutils literal notranslate"><span class="pre">ScaleType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solfege.MAJOR"><code class="docutils literal notranslate"><span class="pre">MAJOR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solfege.MINOR"><code class="docutils literal notranslate"><span class="pre">MINOR</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -124,45 +131,70 @@
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="solfege.Note">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">Note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">octave</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/solfege/note.html#Note"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.Note" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">Note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">octave</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/solfege/note.html#Note"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.Note" title="Link to this definition"></a></dt>
 <dd><p>Represent a note on a scale.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="solfege.Note.letter">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">letter</span></span><a class="headerlink" href="#solfege.Note.letter" title="Link to this definition"></a></dt>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>)</p></li>
+<li><p><strong>octave</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py property">
+<dt class="sig sig-object py" id="solfege.letter">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">letter</span></span><a class="headerlink" href="#solfege.letter" title="Link to this definition"></a></dt>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">The</span> <span class="pre">letter</span> <span class="pre">part</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">note</span> <span class="pre">name.</span></span></dt>
 <dd></dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="solfege.Note.accidental">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accidental</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#solfege.Note.accidental" title="Link to this definition"></a></dt>
+</dd>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py property">
+<dt class="sig sig-object py" id="solfege.accidental">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">accidental</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#solfege.accidental" title="Link to this definition"></a></dt>
 <dd><p>If # or b or None if no accidental on this note.</p>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="solfege.Note.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#solfege.Note.name" title="Link to this definition"></a></dt>
+</dd>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py property">
+<dt class="sig sig-object py" id="solfege.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#solfege.name" title="Link to this definition"></a></dt>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">The</span> <span class="pre">short</span> <span class="pre">name</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">note.</span></span></dt>
 <dd><p>e.g. C or A# or Bb</p>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="solfege.Note.octave">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">octave</span></span><a class="headerlink" href="#solfege.Note.octave" title="Link to this definition"></a></dt>
+</dd>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py property">
+<dt class="sig sig-object py" id="solfege.octave">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">octave</span></span><a class="headerlink" href="#solfege.octave" title="Link to this definition"></a></dt>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">The</span> <span class="pre">octave</span> <span class="pre">this</span> <span class="pre">note</span> <span class="pre">is</span> <span class="pre">in.</span></span></dt>
 <dd></dd></dl>
 
-</dd></dl>
-
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="solfege.Scale">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starting_note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="note/index.html#solfege.note.Note" title="solfege.note.Note"><span class="pre">solfege.note.Note</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#solfege.ScaleType" title="solfege.ScaleType"><span class="pre">ScaleType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ScaleType.MAJOR</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/solfege/scale.html#Scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.Scale" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starting_note</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ScaleType.MAJOR</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/solfege/scale.html#Scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.Scale" title="Link to this definition"></a></dt>
 <dd><p>A representation of a musical scale.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="solfege.Scale.solfege">
-<span class="sig-name descname"><span class="pre">solfege</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="note/index.html#solfege.note.Note" title="solfege.note.Note"><span class="pre">solfege.note.Note</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/solfege/scale.html#Scale.solfege"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.Scale.solfege" title="Link to this definition"></a></dt>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>starting_note</strong> (<a class="reference internal" href="note/index.html#solfege.note.Note" title="solfege.note.Note"><em>solfege.note.Note</em></a>)</p></li>
+<li><p><strong>type</strong> (<a class="reference internal" href="#solfege.ScaleType" title="solfege.ScaleType"><em>ScaleType</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py method">
+<dt class="sig sig-object py" id="solfege.solfege">
+<span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">solfege</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solfege.solfege" title="Link to this definition"></a></dt>
 <dd><p>Get the movable-do solfege name for a note in this scale.</p>
 <p>For minor keys, moving-do la-based minor is used.</p>
 <dl class="simple">
@@ -173,25 +205,29 @@
 </dl>
 </dd></dl>
 
-</dd></dl>
-
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="solfege.ScaleType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">ScaleType</span></span><a class="reference internal" href="../../_modules/solfege/scale.html#ScaleType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.ScaleType" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
 <p>Supported scale types.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="solfege.ScaleType.MAJOR">
-<span class="sig-name descname"><span class="pre">MAJOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#solfege.ScaleType.MAJOR" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="solfege.ScaleType.MINOR">
-<span class="sig-name descname"><span class="pre">MINOR</span></span><a class="headerlink" href="#solfege.ScaleType.MINOR" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
+<dl>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py attribute">
+<dt class="sig sig-object py" id="solfege.MAJOR">
+<span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">MAJOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#solfege.MAJOR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py attribute">
+<dt class="sig sig-object py" id="solfege.MINOR">
+<span class="sig-prename descclassname"><span class="pre">solfege.</span></span><span class="sig-name descname"><span class="pre">MINOR</span></span><a class="headerlink" href="#solfege.MINOR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd>
+</dl>
 </section>
 </section>
 

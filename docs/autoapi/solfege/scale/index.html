@@ -110,25 +110,40 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.scale.</span></span><span class="sig-name descname"><span class="pre">ScaleType</span></span><a class="reference internal" href="../../../_modules/solfege/scale.html#ScaleType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.scale.ScaleType" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
 <p>Supported scale types.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="solfege.scale.ScaleType.MAJOR">
-<span class="sig-name descname"><span class="pre">MAJOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="reference internal" href="../../../_modules/solfege/scale.html#ScaleType.MAJOR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.scale.ScaleType.MAJOR" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="solfege.scale.ScaleType.MINOR">
-<span class="sig-name descname"><span class="pre">MINOR</span></span><a class="reference internal" href="../../../_modules/solfege/scale.html#ScaleType.MINOR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.scale.ScaleType.MINOR" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
+<dl>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py attribute">
+<dt class="sig sig-object py" id="solfege.scale.MAJOR">
+<span class="sig-prename descclassname"><span class="pre">solfege.scale.</span></span><span class="sig-name descname"><span class="pre">MAJOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#solfege.scale.MAJOR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py attribute">
+<dt class="sig sig-object py" id="solfege.scale.MINOR">
+<span class="sig-prename descclassname"><span class="pre">solfege.scale.</span></span><span class="sig-name descname"><span class="pre">MINOR</span></span><a class="headerlink" href="#solfege.scale.MINOR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="solfege.scale.Scale">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.scale.</span></span><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starting_note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../note/index.html#solfege.note.Note" title="solfege.note.Note"><span class="pre">solfege.note.Note</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#solfege.scale.ScaleType" title="solfege.scale.ScaleType"><span class="pre">ScaleType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ScaleType.MAJOR</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/solfege/scale.html#Scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.scale.Scale" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solfege.scale.</span></span><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">starting_note</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ScaleType.MAJOR</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/solfege/scale.html#Scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.scale.Scale" title="Link to this definition"></a></dt>
 <dd><p>A representation of a musical scale.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="solfege.scale.Scale.solfege">
-<span class="sig-name descname"><span class="pre">solfege</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../note/index.html#solfege.note.Note" title="solfege.note.Note"><span class="pre">solfege.note.Note</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/solfege/scale.html#Scale.solfege"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#solfege.scale.Scale.solfege" title="Link to this definition"></a></dt>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>starting_note</strong> (<a class="reference internal" href="../note/index.html#solfege.note.Note" title="solfege.note.Note"><em>solfege.note.Note</em></a>)</p></li>
+<li><p><strong>type</strong> (<a class="reference internal" href="#solfege.scale.ScaleType" title="solfege.scale.ScaleType"><em>ScaleType</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl>
+<dt><span class="raw-html"><br /></span></dt><dd><dl class="py method">
+<dt class="sig sig-object py" id="solfege.scale.solfege">
+<span class="sig-prename descclassname"><span class="pre">solfege.scale.</span></span><span class="sig-name descname"><span class="pre">solfege</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solfege.scale.solfege" title="Link to this definition"></a></dt>
 <dd><p>Get the movable-do solfege name for a note in this scale.</p>
 <p>For minor keys, moving-do la-based minor is used.</p>
 <dl class="simple">
@@ -139,8 +154,8 @@
 </dl>
 </dd></dl>
 
-</dd></dl>
-
+</dd>
+</dl>
 </section>
 </section>
 

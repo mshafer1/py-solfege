@@ -32,41 +32,45 @@ Classes
 Package Contents
 ----------------
 
-.. py:class:: Note(name: str, octave: Optional[int] = None)
+.. role:: raw-html(raw)
+    :format: html
+.. py:class:: Note(name, octave = None)
 
    Represent a note on a scale.
 
-
+:raw-html:`<br />`
    .. py:property:: letter
       The letter part of the note name.
 
 
-
+:raw-html:`<br />`
    .. py:property:: accidental
       :type: Optional[str]
 
       If # or b or None if no accidental on this note.
 
 
-
+:raw-html:`<br />`
    .. py:property:: name
       The short name of the note.
 
       e.g. C or A# or Bb
 
 
-
+:raw-html:`<br />`
    .. py:property:: octave
       The octave this note is in.
 
 
 
-.. py:class:: Scale(starting_note: solfege.note.Note, type: ScaleType = ScaleType.MAJOR)
+.. role:: raw-html(raw)
+    :format: html
+.. py:class:: Scale(starting_note, type = ScaleType.MAJOR)
 
    A representation of a musical scale.
 
-
-   .. py:method:: solfege(note_: solfege.note.Note)
+:raw-html:`<br />`
+   .. py:method:: solfege(note_)
 
       Get the movable-do solfege name for a note in this scale.
 
@@ -80,6 +84,8 @@ Package Contents
 
 
 
+.. role:: raw-html(raw)
+    :format: html
 .. py:class:: ScaleType
 
    Bases: :py:obj:`enum.Enum`
@@ -87,12 +93,12 @@ Package Contents
 
    Supported scale types.
 
-
+:raw-html:`<br />`
    .. py:attribute:: MAJOR
       :value: 0
 
 
-
+:raw-html:`<br />`
    .. py:attribute:: MINOR
 
 
