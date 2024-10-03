@@ -86,6 +86,17 @@
 <p>I was unable to find a complete implementation in Python.
 All other projects I found on Pypi.org, github.com, and using Google search did NOT handle non-diatonic notes (and many required numpy as a dependency -&gt; which is a quite heavy handed dependency for such a task…).</p>
 <p>Usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">solfege</span>
+
+<span class="n">scale</span> <span class="o">=</span> <span class="n">solfege</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">solfege</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">))</span>
+<span class="n">scale</span><span class="o">.</span><span class="n">solfege</span><span class="p">(</span><span class="n">solfege</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">))</span>
+<span class="c1"># &#39;Do&#39;</span>
+<span class="n">scale</span><span class="o">.</span><span class="n">solfege</span><span class="p">(</span><span class="n">solfege</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">))</span>
+<span class="c1"># &#39;Re&#39;</span>
+<span class="n">scale</span><span class="o">.</span><span class="n">solfege</span><span class="p">(</span><span class="n">solfege</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C#&quot;</span><span class="p">))</span>
+<span class="s1">&#39;Di&#39;</span>
+</pre></div>
+</div>
 <p>See <a class="reference external" href="https://mshafer1.github.io/py-solfege">the docs</a>.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>

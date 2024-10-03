@@ -13,4 +13,16 @@ All other projects I found on Pypi.org, github.com, and using Google search did 
 
 Usage:
 
+```python
+import solfege
+
+scale = solfege.Scale(solfege.Note("C"))
+scale.solfege(solfege.Note("C"))
+# 'Do'
+scale.solfege(solfege.Note("D")) 
+# 'Re'
+scale.solfege(solfege.Note("C#")) 
+'Di'
+```
+
 See [the docs](https://mshafer1.github.io/py-solfege).
