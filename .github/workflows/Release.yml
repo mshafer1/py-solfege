@@ -6,7 +6,7 @@ on:
 
 env:
   # Versions are also listed in PR.yml
-  POETRY_VERSION: 1.8.1
+  POETRY_VERSION: 1.8.2
   PYTHON_VERSION: 3.11  # Use latest
 
 jobs:
@@ -24,8 +24,6 @@ jobs:
       - uses: Gr1N/setup-poetry@v8
         with:
           poetry-version: ${{ env.POETRY_VERSION }}
-      # @TODO: This is a workaround for there not being a way to check the lock file
-      #   See: https://github.com/python-poetry/poetry/issues/453
       - name: Check for lock changes
         run: |
           poetry lock --check
