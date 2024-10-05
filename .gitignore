@@ -4,3 +4,5 @@ __pycache__/
 .vscode/
 *.pyc
 dist/
+# auto-generated at test time from readme
+test_readme.py

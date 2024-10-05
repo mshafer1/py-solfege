@@ -16,6 +16,7 @@ python = "^3.9"
 pytest = "^8.3.3"
 pytest-snapshot = "^0.9.0"
 pytest-mock = "^3.14.0"
+pytest-readme="^1.0.1"
 ni-python-styleguide = "^0.4.6"
 
 
@@ -24,6 +25,9 @@ sphinx = "^7.0"
 sphinx-autoapi = "^3.3.2"
 sphinx-rtd-theme = "^2.0.0"
 sphinx-mdinclude = "^0.6.2"
+
+[tool.pytest.ini_options]
+addopts='--doctest-modules'
 
 [build-system]
 requires = ["poetry-core"]
