@@ -29,6 +29,9 @@ sphinx-mdinclude = "^0.6.2"
 [tool.pytest.ini_options]
 addopts='--doctest-modules'
 
+[tool.ni-python-styleguide]
+extend_exclude = "test_readme.py"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
