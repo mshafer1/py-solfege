@@ -30,13 +30,11 @@ Module Contents
    .. py:property:: letter
       The letter part of the note name.
 
-
 :raw-html:`<br />`
    .. py:property:: accidental
       :type: Optional[str]
 
       If # or b or None if no accidental on this note.
-
 
 :raw-html:`<br />`
    .. py:property:: name
@@ -44,10 +42,8 @@ Module Contents
 
       e.g. C or A# or Bb
 
-
 :raw-html:`<br />`
    .. py:property:: octave
       The octave this note is in.
-
 
 

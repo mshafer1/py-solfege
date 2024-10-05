@@ -35,8 +35,12 @@ Module Contents
       :value: 0
 
 
+      Enum for selecting a Major scale.
+
 :raw-html:`<br />`
    .. py:attribute:: MINOR
+
+      Enum for selecting a Natural Minor scale.
 
 
 .. role:: raw-html(raw)
@@ -52,11 +56,11 @@ Module Contents
 
       For minor keys, moving-do la-based minor is used.
 
-      Args:
-          note_ (note.Note): The note in question.
+      :param note_: The note in question.
+      :type note_: note.Note
 
-      Returns:
-          (str) the solfege name for that note.
+      :returns: The solfege name for that note.
+      :rtype: str
 
 
 
