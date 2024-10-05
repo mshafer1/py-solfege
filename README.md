@@ -8,7 +8,7 @@ A Python library for dealing with musical scales and there solfège.
 
 ## Why?
 
-I wanted a library that I could ask for "in this key, what is the solfege name for this note?"
+I needed a library that I could ask for "in this key, what is the solfege name for this note?"
 
 JS has the [Teoria](https://www.npmjs.com/package/teoria) library that could do the scale, but I needed this in Python.
 
