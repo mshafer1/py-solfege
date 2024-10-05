@@ -67,7 +67,13 @@ jobs:
       - name: Build Python package
         if: ${{ github.event.release.target_commitish == 'main' }}
         run: |
-          poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN}}
+          poetry build
+        
+      - name: Publish the package
+        uses: pypa/gh-action-pypi-publish@release/v1
+        if: ${{ github.event.release.target_commitish == 'main' }}
+        with:
+          packages-dir: dist/
 
       - name: Bump poetry version to next alpha version
         run: |
