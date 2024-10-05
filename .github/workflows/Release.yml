@@ -13,10 +13,22 @@ jobs:
   publish_package:
     name: Publish Package
     runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.release.target_commitish }} # This is the branch the release was created from. Normally main, but can be a dev branch
+
+      - name: Configure Git
+        if: ${{ github.event.release.target_commitish == 'main' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git pull --tags -f
 
       - uses: actions/setup-python@v2
         with:
@@ -47,8 +59,12 @@ jobs:
       - name: Make sure docs are updated
         run: |
           poetry run sphinx-build _docs_conf docs
+      
+      - name: Commit docs into branch
+        run: |
+          git commit -m "Build docs - ${{ github.head_ref }}" -a
 
-      - name: Build Python package and publish to PyPI
+      - name: Build Python package
         if: ${{ github.event.release.target_commitish == 'main' }}
         run: |
           poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN}}
