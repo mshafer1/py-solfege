@@ -86,7 +86,7 @@ Package Contents
 
 .. role:: raw-html(raw)
     :format: html
-.. py:class:: ScaleType
+.. py:class:: ScaleType(*args, **kwds)
 
    Bases: :py:obj:`enum.Enum`
 
