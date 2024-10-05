@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "solfege"
-version = "0.1.0"
+version = "0.2.0a0"
 description = "Python library for dealing with musical scales and solfege"
 authors = ["mshafer1"]
 license = "MIT"
@@ -28,6 +28,9 @@ sphinx-mdinclude = "^0.6.2"
 
 [tool.pytest.ini_options]
 addopts='--doctest-modules'
+
+[tool.ni-python-styleguide]
+extend_exclude = "test_readme.py"
 
 [build-system]
 requires = ["poetry-core"]
