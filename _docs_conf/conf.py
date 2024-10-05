@@ -21,6 +21,7 @@ extensions = [
     "sphinx.ext.githubpages",
     "sphinx_mdinclude",
     "sphinx.ext.autodoc.typehints",
+    "sphinx.ext.napoleon",
 ]
 
 extensions.append("autoapi.extension")

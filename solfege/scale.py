@@ -35,7 +35,9 @@ class ScaleType(enum.Enum):
     """Supported scale types."""
 
     MAJOR = 0
+    """Enum for selecting a Major scale."""
     MINOR = enum.auto
+    """Enum for selecting a Natural Minor scale."""
 
 
 _SCALE_KEY_SIGNATURES = {
@@ -141,7 +143,7 @@ class Scale:
             for i, note_ in enumerate(self._diatonic_notes[:-1])
         }
 
-    def solfege(self, note_: note.Note):
+    def solfege(self, note_: note.Note) -> str:
         """Get the movable-do solfege name for a note in this scale.
 
         For minor keys, moving-do la-based minor is used.
@@ -150,7 +152,7 @@ class Scale:
             note_ (note.Note): The note in question.
 
         Returns:
-            (str) the solfege name for that note.
+            str: The solfege name for that note.
         """
         index = self._diatonic_position_map.get(note_.name)
         if index is not None:
