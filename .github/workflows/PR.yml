@@ -40,6 +40,10 @@ jobs:
         run: poetry install -vvv
       - name: Lint the Code
         run: poetry run ni-python-styleguide lint
+      - name: Check that package can build
+        run: poetry run sphinx-build _docs_conf docs
+      - name: Check that package can build
+        run: poetry build
 
   tests:
     runs-on: ${{ matrix.os }}
